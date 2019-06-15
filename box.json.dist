@@ -2,7 +2,7 @@
     "chmod": "0755",
     "main": "bin/env-checker",
     "output": "bin/env-checker.phar",
-    "directories": ["src"],
+    "directories": ["config", "src"],
     "finder": [
         {
             "name": "*.php",

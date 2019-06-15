@@ -30,6 +30,6 @@ final class DotenvLoader implements EnvVarLoader
     {
         $vars = $this->dotenv->parse(file_get_contents($path));
 
-        return new VarCollection($vars);
+        return new VarCollection(array_keys($vars));
     }
 }

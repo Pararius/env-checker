@@ -35,7 +35,7 @@ compile: ## Compiles the package into a PHAR file for release purposes
 	test -f ./box.phar || wget -q https://github.com/humbug/box/releases/download/3.8.0/box.phar && chmod u+x ./box.phar
 	docker-compose run --rm php ./box.phar compile -q
 
-run: ## Runs the main executable (use `make run ARGS=...` to append arguments)
-	docker-compose run --rm php ./bin/env-checker.phar $(ARGS)
+demo: ## Runs a check on the example directory
+	docker-compose run --rm php ./bin/env-checker.phar check ./example/specification/.env.dist ./example/implementation
 
-.PHONY: install up down test deptrac cs compile run
+.PHONY: install up down test deptrac cs compile demo
