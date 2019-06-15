@@ -1,5 +1,3 @@
-sudo: true
-
 cache:
   directories:
     - "$HOME/.composer/cache/files"
@@ -8,10 +6,6 @@ language: php
 
 matrix:
   fast_finish: true
-
-#env:
-#  global:
-#    - PATH=${TRAVIS_BUILD_DIR}/travis/bin/:${PATH}
 
 #services:
 #  - docker
@@ -23,10 +17,7 @@ script:
   - make test
   - make deptrac
   - make cs
-  # verify it can be compiled and executed
-  - wget https://github.com/humbug/box/releases/download/3.8.0/box.phar && chmod +x ./box.phar
-  - ./box.phar compile
-  - ./bin/env-checker.phar
+  - make compile run
 
 deploy:
   provider: releases
@@ -38,5 +29,5 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    repo: pararius/env-checker
+    repo: Pararius/env-checker
     condition: "$EXECUTE_DEPLOYMENT"
