@@ -89,4 +89,8 @@ configuration located in a separate repository, making it hard to keep things in
 - Add more (implementation) loaders; adding support for tools like Ansible etc.  
 - Make the general loading smarter (e.g. notice differences between 'micro' services)
 - Add public key verification to the PHAR distribution.
- 
+
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md)
