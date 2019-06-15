@@ -16,19 +16,27 @@ matrix:
 #services:
 #  - docker
 
-stages:
-  - name: test
-    if: type = pull_request
-#  - name: build
-#    if: type != pull_request AND branch = master
+install:
+  - make install
 
-jobs:
-  include:
-    - stage: test
-      name: test
-      script:
-        - make \
-          install \
-          test \
-          deptrac \
-          cs
+script:
+  - make test
+  - make deptrac
+  - make cs
+  # verify it can be compiled and executed
+  - wget https://github.com/humbug/box/releases/download/3.8.0/box.phar && chmod +x ./box.phar
+  - ./box.phar compile
+  - ./bin/env-checker.phar
+
+deploy:
+  provider: releases
+  api_key:
+    secure: NmVCFKadSjj+lGeU/fb8UFjOsf6iXc6x9HEsmNtOkcdYrIke84vS+wz9opqKpQ+11Sk6dJX38P7TVoaYNsDJ9Hy/EJyEV+i3VCzMZ0PgJSVVIM+cq5G2SGtiwl2OgRYGsRSioxXLZSW8Ufd1zvQJ77P/ovlZoRnEw9CDuDC6BeNM+fa6oMkwNOHviZPLK/xceihuCvttALzGpUxxkV9zkWajh3jvogchWSFfOPHQ0KRkqr1qGZARH9Wz8QoRw/Yn0uQeW/q2QRvzbkAQS5swPfqL3DvavvQTosr1MR8wsTMkHOrlCbL/VjYRPsBQG68Sse/TQP/wevVSjJPzbwtStOf6yLSuRcYJLvHoIfHRP5nsGo7TFjn1RT8yUpmERTQF4jQ7dEtQczatGlZcWoTIKYXlrzWRB3hR60SAvQYo5PU1e4q/TEgHq9FJy5XARY+OiDtZ4iUn1LNO0JpoRYb4fN4ld9Lq6iDMvAAgolQ0Ey0tJvaHs+t5mgXBeX8cRzcPKh/6/QbCbbRmNLxDVZ2MqR75XQwHoRBxOf5kQZMoTArq8cpoMq8/mix56jpF5LXVzb081vaKwN2UTtMZfmAW4XdikeqQL30gcvu4DObzt5LfisZ5jUQg+0InZsZXDkm/Rptpz94GPauJgBRlTJrTMAb1qfJP9ui78Dpvxf26mVw=
+  file:
+    - bin/env-checker.phar
+    #- bin/env-checker.phar.pubkey
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: pararius/env-checker
+    condition: "$EXECUTE_DEPLOYMENT"

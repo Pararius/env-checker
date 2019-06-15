@@ -1,5 +1,6 @@
 .deptrac.cache
 .php_cs.cache
+*.phar
 composer.lock
 tests/.phpunit.result.cache
 vendor

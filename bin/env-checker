@@ -3,13 +3,26 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+use Humbug\SelfUpdate\Updater;
 use Pararius\EnvChecker\Infrastructure\Loader\DotEnvEnvVarLoader;
 use Pararius\EnvChecker\Infrastructure\Loader\KubernetesYamlEnvVarLoader;
 use Pararius\EnvChecker\Presentation\Cli\Command\CheckCommand;
+use Pararius\EnvChecker\Presentation\Cli\Command\SelfUpdateCommand;
 use Symfony\Component\Console\Application;
 
-(new Application('env-checker', '1.0.0'))
-    ->add(new CheckCommand(new DotEnvEnvVarLoader(), new KubernetesYamlEnvVarLoader()))
-    ->getApplication()
-    ->run()
-;
+$filename = pathinfo(__FILE__, PATHINFO_FILENAME);
+
+$updater = new Updater('bin/'.$filename.'.phar', false);
+$updater->setStrategy(Updater::STRATEGY_GITHUB);
+
+/* @var \Humbug\SelfUpdate\Strategy\GithubStrategy $strategy */
+$strategy = $updater->getStrategy();
+$strategy->setPackageName('pararius/env-checker');
+$strategy->setPharName($filename.'.phar');
+
+$application = new Application('env-checker', '1.0.0');
+$application->addCommands([
+    new CheckCommand(new DotEnvEnvVarLoader(), new KubernetesYamlEnvVarLoader()),
+    new SelfUpdateCommand($updater),
+]);
+$application->run();

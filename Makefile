@@ -15,7 +15,7 @@ help: ## Show this help message.
 
 install: ## Installs all dependencies and prerequisites.
 	#docker-compose run --rm php composer install
-	composer install
+	composer install --no-interaction --no-progress --no-suggest --prefer-dist
 
 up: install ## Brings all containers up.
 	docker-compose up -d
