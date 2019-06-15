@@ -1,6 +1,6 @@
 {
     "name": "pararius/env-checker",
-    "description": "Small tool for checking your deployment configuration for missing environment variables",
+    "description": "Small tool to test your deployment configuration for missing environment variables",
     "type": "library",
     "license": "MIT",
     "require": {
