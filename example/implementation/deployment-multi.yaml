@@ -41,6 +41,6 @@ spec:
             - name: DEFINED_IN_BOTH_4
               valueFrom:
                 secretKeyRef:
-                  name: my-secret
+                  name: my-virtual-secret
                   key: defined-in-both-4
 

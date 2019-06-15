@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pararius\EnvChecker\Application\Loader;
+namespace Pararius\EnvChecker\Application;
 
 final class VarCollection
 {

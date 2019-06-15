@@ -36,6 +36,6 @@ compile: ## Compiles the package into a PHAR file for release purposes
 	docker-compose run --rm php ./box.phar compile -q
 
 demo: ## Runs a check on the example directory
-	docker-compose run --rm php ./bin/env-checker.phar check ./example/specification/.env.dist ./example/implementation
+	docker-compose run --rm php ./bin/env-checker.phar check --informative ./example/specification/.env.dist ./example/implementation
 
 .PHONY: install up down test deptrac cs compile demo

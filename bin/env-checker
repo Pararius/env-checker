@@ -4,23 +4,9 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../config/MyKernel.php';
 
-use Humbug\SelfUpdate\Updater;
-use Pararius\EnvChecker\Infrastructure\Loader\DotenvLoader;
-use Pararius\EnvChecker\Infrastructure\Loader\KubernetesYamlEnvVarLoader;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Dotenv\Dotenv;
-use Symfony\Component\Finder\Finder;
-
-$kernel = new MyKernel('prod', false);
+$kernel = new MyKernel('dev', true);
 $kernel->boot();
 
 $container = $kernel->getContainer();
 $application = $container->get('application');
-//
-//
-//$application = new Application('env-checker');
-//$application->addCommands([
-//    new CheckCommand(new DotenvLoader(new Dotenv()), new KubernetesYamlEnvVarLoader(new Finder())),
-//    new SelfUpdateCommand($updater),
-//]);
 $application->run();

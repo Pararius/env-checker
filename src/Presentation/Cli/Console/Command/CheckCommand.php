@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Pararius\EnvChecker\Presentation\Cli\Console\Command;
 
-use Pararius\EnvChecker\Application\Loader\EnvVarLoader;
-use Pararius\EnvChecker\Application\Loader\VarCollection;
+use Pararius\EnvChecker\Application\EnvVarLoader;
+use Pararius\EnvChecker\Application\VarCollection;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
@@ -63,6 +63,13 @@ final class CheckCommand extends Command
             'Flag to indicate only missing variables should be displayed, instead of all'
         );
 
+        $this->addOption(
+            'informative',
+            null,
+            InputOption::VALUE_NONE,
+            'Flag to indicate that exit code should always be 0, even if missing variables have been detected'
+        );
+
         $this->setDescription(
             'Checks whether all variables defined in your (project) specification, ' .
             'are implemented by your (deployment) implementation files'
@@ -84,7 +91,7 @@ final class CheckCommand extends Command
                 $input->getArgument('path-to-implementation')
             ));
 
-            return 1;
+            return $input->getOption('informative') ? 0 : 1;
         }
 
         $output->writeln('<info>Great! All the expected variables have been defined on the implementation side!</info>');

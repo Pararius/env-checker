@@ -32,12 +32,12 @@ services:
       - ['setStrategyObject', ['@updater_strategy']]
 
   loader.dotenv:
-    class: Pararius\EnvChecker\Infrastructure\Loader\DotenvLoader
+    class: Pararius\EnvChecker\Infrastructure\Specification\Dotenv\Loader
     arguments:
       - '@dotenv'
 
   loader.kubernetes_yaml:
-    class: Pararius\EnvChecker\Infrastructure\Loader\KubernetesYamlEnvVarLoader
+    class: Pararius\EnvChecker\Infrastructure\Implementation\Kubernetes\Loader
     arguments:
       - '@finder'
 

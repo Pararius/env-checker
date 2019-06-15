@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Pararius\EnvChecker\Infrastructure\Loader;
+namespace Pararius\EnvChecker\Infrastructure\Specification\Dotenv;
 
-use Pararius\EnvChecker\Application\Loader\EnvVarLoader;
-use Pararius\EnvChecker\Application\Loader\VarCollection;
+use Pararius\EnvChecker\Application\EnvVarLoader;
+use Pararius\EnvChecker\Application\VarCollection;
 use Symfony\Component\Dotenv\Dotenv;
 
-final class DotenvLoader implements EnvVarLoader
+final class Loader implements EnvVarLoader
 {
     /**
      * @var Dotenv
