@@ -1,7 +1,8 @@
 {
     "name": "pararius/env-checker",
-    "type": "project",
-    "license": "proprietary",
+    "description": "Small tool for checking your deployment configuration for missing environment variables",
+    "type": "library",
+    "license": "MIT",
     "require": {
         "php": "^7.2",
         "symfony/console": "^4.3",
