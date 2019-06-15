@@ -31,17 +31,17 @@ wget https://github.com/pararius/env-checker/releases/download/VERSION/env-check
 composer require --dev pararius/env-checker
 ```
 
+**NOTE:** The rest of the documentation assumes you have installed env-checker using the PHAR method. 
+
 
 ## Updates
 
 If you are using the PHAR release, you can easily update your version by running the self-update command:
 ```bash
-
+./env-checker.phar self-update
 ```
 
 ## Usage
-
-This assumes you have installed env-checker using the PHAR method, mentioned [above](#PHAR). 
 
 #### Locally (e.g. a pre-commit hook)
 
@@ -89,4 +89,8 @@ configuration located in a separate repository, making it hard to keep things in
 - Add more (implementation) loaders; adding support for tools like Ansible etc.  
 - Make the general loading smarter (e.g. notice differences between 'micro' services)
 - Add public key verification to the PHAR distribution.
- 
+
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md)
