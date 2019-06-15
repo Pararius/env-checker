@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Pararius\EnvChecker\Tests\Application\Loader;
+namespace Pararius\EnvChecker\Tests\Application;
 
-use Pararius\EnvChecker\Application\Loader\VarCollection;
+use Pararius\EnvChecker\Application\VarCollection;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 

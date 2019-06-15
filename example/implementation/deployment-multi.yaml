@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {}
+spec:
+  replicas: 2
+  selector: {}
+  template:
+    metadata: {}
+    spec:
+      imagePullSecrets:
+        - name: gcrsecret
+      initContainers:
+        - name: my-init-service
+          image: my-init-service-image
+          command: ["bin/my-tool", "command"]
+          env:
+            - name: DEFINED_IN_BOTH_2
+              value: "..."
+          envFrom:
+            - secretRef:
+                name: my-secret
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {}
+spec:
+  replicas: 2
+  selector: {}
+  template:
+    metadata: {}
+    spec:
+      imagePullSecrets:
+        - name: gcrsecret
+      containers:
+        - name: my-service
+          image: my-service-image
+          env:
+            - name: DEFINED_IN_IMPLEMENTATION
+              value: "..."
+            - name: DEFINED_IN_BOTH_4
+              valueFrom:
+                secretKeyRef:
+                  name: my-virtual-secret
+                  key: defined-in-both-4
+

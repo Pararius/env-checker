@@ -1,0 +1,53 @@
+services:
+  _defaults:
+    autowire: false
+
+  application:
+    public: true
+    class: Symfony\Component\Console\Application
+    arguments:
+      - 'env-checker'
+    calls:
+      - ['add', ['@check_command']]
+      - ['add', ['@self_update_command']]
+
+  dotenv:
+    class: Symfony\Component\Dotenv\Dotenv
+
+  finder:
+    class: Symfony\Component\Finder\Finder
+
+  updater_strategy:
+    class: Humbug\SelfUpdate\Strategy\GithubStrategy
+    calls:
+      - ['setPackageName', ['pararius/env-checker']]
+      - ['setPharName', ['env-checker.phar']]
+
+  updater:
+    class: Humbug\SelfUpdate\Updater
+    arguments:
+      - 'bin/env-checker.phar'
+      - false
+    calls:
+      - ['setStrategyObject', ['@updater_strategy']]
+
+  loader.dotenv:
+    class: Pararius\EnvChecker\Infrastructure\Specification\Dotenv\Loader
+    arguments:
+      - '@dotenv'
+
+  loader.kubernetes_yaml:
+    class: Pararius\EnvChecker\Infrastructure\Implementation\Kubernetes\Loader
+    arguments:
+      - '@finder'
+
+  check_command:
+    class: Pararius\EnvChecker\Presentation\Cli\Console\Command\CheckCommand
+    arguments:
+      - '@loader.dotenv'
+      - '@loader.kubernetes_yaml'
+
+  self_update_command:
+    class: Pararius\EnvChecker\Presentation\Cli\Console\Command\SelfUpdateCommand
+    arguments:
+      - '@updater'

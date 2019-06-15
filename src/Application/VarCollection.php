@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pararius\EnvChecker\Application\Loader;
+namespace Pararius\EnvChecker\Application;
 
 final class VarCollection
 {
@@ -21,12 +21,19 @@ final class VarCollection
 
     /**
      * @param VarCollection $combineWith
+     * @param bool $sort
      *
      * @return VarCollection
      */
-    public function combine(VarCollection $combineWith): self
+    public function combine(VarCollection $combineWith, bool $sort = false): self
     {
-        return new static(array_unique(array_merge($this->all(), $combineWith->all())));
+        $combined = array_unique(array_merge($this->all(), $combineWith->all()));
+
+        if ($sort) {
+            asort($combined);
+        }
+
+        return new static($combined);
     }
 
     /**
@@ -63,5 +70,13 @@ final class VarCollection
     public function diff(VarCollection $compareWith): self
     {
         return new static(array_diff($this->vars, $compareWith->all()));
+    }
+
+    /**
+     * @return int
+     */
+    public function count(): int
+    {
+        return count($this->vars);
     }
 }
