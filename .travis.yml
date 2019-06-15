@@ -1,5 +1,3 @@
-sudo: true
-
 cache:
   directories:
     - "$HOME/.composer/cache/files"
@@ -9,28 +7,27 @@ language: php
 matrix:
   fast_finish: true
 
-#env:
-#  global:
-#    - PATH=${TRAVIS_BUILD_DIR}/travis/bin/:${PATH}
-
 #services:
 #  - docker
 
-stages:
-  - name: test
-    if: type = pull_request
-#  - name: build
-#    if: type != pull_request AND branch = master
+install:
+  - make install
 
-jobs:
-  include:
-    - stage: test
-      name: test
-      script:
-        - make install test deptrac
-        - |
-          IFS='
-          '
-          CHANGED_FILES=$(git diff --name-only --diff-filter=ACMRTUXB "${COMMIT_RANGE}")
-          if ! echo "${CHANGED_FILES}" | grep -qE "^(\\.php_cs(\\.dist)?|composer\\.lock)$"; then EXTRA_ARGS=$(printf -- '--path-mode=intersection\n--\n%s' "${CHANGED_FILES}"); else EXTRA_ARGS=''; fi
-          vendor/bin/php-cs-fixer fix --config=.php_cs -v --dry-run --stop-on-violation --using-cache=no ${EXTRA_ARGS}
+script:
+  - make test
+  - make deptrac
+  - make cs
+  - make compile run
+
+deploy:
+  provider: releases
+  api_key:
+    secure: NmVCFKadSjj+lGeU/fb8UFjOsf6iXc6x9HEsmNtOkcdYrIke84vS+wz9opqKpQ+11Sk6dJX38P7TVoaYNsDJ9Hy/EJyEV+i3VCzMZ0PgJSVVIM+cq5G2SGtiwl2OgRYGsRSioxXLZSW8Ufd1zvQJ77P/ovlZoRnEw9CDuDC6BeNM+fa6oMkwNOHviZPLK/xceihuCvttALzGpUxxkV9zkWajh3jvogchWSFfOPHQ0KRkqr1qGZARH9Wz8QoRw/Yn0uQeW/q2QRvzbkAQS5swPfqL3DvavvQTosr1MR8wsTMkHOrlCbL/VjYRPsBQG68Sse/TQP/wevVSjJPzbwtStOf6yLSuRcYJLvHoIfHRP5nsGo7TFjn1RT8yUpmERTQF4jQ7dEtQczatGlZcWoTIKYXlrzWRB3hR60SAvQYo5PU1e4q/TEgHq9FJy5XARY+OiDtZ4iUn1LNO0JpoRYb4fN4ld9Lq6iDMvAAgolQ0Ey0tJvaHs+t5mgXBeX8cRzcPKh/6/QbCbbRmNLxDVZ2MqR75XQwHoRBxOf5kQZMoTArq8cpoMq8/mix56jpF5LXVzb081vaKwN2UTtMZfmAW4XdikeqQL30gcvu4DObzt5LfisZ5jUQg+0InZsZXDkm/Rptpz94GPauJgBRlTJrTMAb1qfJP9ui78Dpvxf26mVw=
+  file:
+    - bin/env-checker.phar
+    #- bin/env-checker.phar.pubkey
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: Pararius/env-checker
+    condition: "$EXECUTE_DEPLOYMENT"

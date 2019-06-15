@@ -1,8 +1,11 @@
 {
-    "type": "project",
-    "license": "proprietary",
+    "name": "pararius/env-checker",
+    "description": "Small tool for checking your deployment configuration for missing environment variables",
+    "type": "library",
+    "license": "MIT",
     "require": {
         "php": "^7.2",
+        "padraic/phar-updater": "^1.0",
         "symfony/console": "^4.3",
         "symfony/dotenv": "^4.3",
         "symfony/finder": "^4.3",
@@ -28,5 +31,6 @@
         "friendsofphp/php-cs-fixer": "^2.15",
         "phpunit/phpunit": "^8.2",
         "sensiolabs-de/deptrac-shim": "^0.5.0"
-    }
+    },
+    "bin": ["bin/env-checker"]
 }
