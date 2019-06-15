@@ -27,4 +27,8 @@ jobs:
     - stage: test
       name: test
       script:
-        - make install test deptrac cs
+        - make \
+          install \
+          test \
+          deptrac \
+          cs
