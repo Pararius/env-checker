@@ -31,4 +31,8 @@ deptrac: ## Verifies contexts are not crossing boundaries
 	#docker-compose run --rm php vendor/bin/deptrac
 	php vendor/bin/deptrac
 
-.PHONY: install up down test deptrac
+cs: ## Verifies contexts are not crossing boundaries
+	#docker-compose run --rm php vendor/bin/deptrac
+	php vendor/bin/php-cs-fixer fix --no-interaction --dry-run
+
+.PHONY: install up down test deptrac cs
