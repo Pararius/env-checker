@@ -1,0 +1,27 @@
+paths:
+  - ./src
+
+exclude_files:
+  - .*test.*
+
+layers:
+  - name: Application
+    collectors:
+      - type: className
+        regex: .*Pararius\\EnvChecker\\Application\\.*
+
+  - name: Infrastructure
+    collectors:
+      - type: className
+        regex: .*Pararius\\EnvChecker\\Infrastructure\\.*
+
+  - name: Presentation
+    collectors:
+      - type: className
+        regex: .*Pararius\\EnvChecker\\Presentation\\.*
+
+ruleset:
+  Presentation:
+    - Application
+  Infrastructure:
+    - Application

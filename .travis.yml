@@ -1,0 +1,36 @@
+sudo: true
+
+cache:
+  directories:
+    - "$HOME/.composer/cache/files"
+
+language: php
+
+matrix:
+  fast_finish: true
+
+#env:
+#  global:
+#    - PATH=${TRAVIS_BUILD_DIR}/travis/bin/:${PATH}
+
+#services:
+#  - docker
+
+stages:
+  - name: test
+    if: type = pull_request
+#  - name: build
+#    if: type != pull_request AND branch = master
+
+jobs:
+  include:
+    - stage: test
+      name: test
+      script:
+        - make install test deptrac
+        - |
+          IFS='
+          '
+          CHANGED_FILES=$(git diff --name-only --diff-filter=ACMRTUXB "${COMMIT_RANGE}")
+          if ! echo "${CHANGED_FILES}" | grep -qE "^(\\.php_cs(\\.dist)?|composer\\.lock)$"; then EXTRA_ARGS=$(printf -- '--path-mode=intersection\n--\n%s' "${CHANGED_FILES}"); else EXTRA_ARGS=''; fi
+          vendor/bin/php-cs-fixer fix --config=.php_cs -v --dry-run --stop-on-violation --using-cache=no ${EXTRA_ARGS}

@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use Pararius\EnvChecker\Infrastructure\Loader\DotEnvEnvVarLoader;
+use Pararius\EnvChecker\Infrastructure\Loader\KubernetesYamlEnvVarLoader;
+use Pararius\EnvChecker\Presentation\Cli\Command\CheckCommand;
+use Symfony\Component\Console\Application;
+
+(new Application('env-checker', '1.0.0'))
+    ->add(new CheckCommand(new DotEnvEnvVarLoader(), new KubernetesYamlEnvVarLoader()))
+    ->getApplication()
+    ->run()
+;

@@ -1,0 +1,32 @@
+{
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": "^7.2",
+        "symfony/console": "^4.3",
+        "symfony/dotenv": "^4.3",
+        "symfony/finder": "^4.3",
+        "symfony/yaml": "^4.3"
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Pararius\\EnvChecker\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pararius\\EnvChecker\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.15",
+        "phpunit/phpunit": "^8.2",
+        "sensiolabs-de/deptrac-shim": "^0.5.0"
+    }
+}
