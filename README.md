@@ -31,17 +31,17 @@ wget https://github.com/pararius/env-checker/releases/download/VERSION/env-check
 composer require --dev pararius/env-checker
 ```
 
+**NOTE:** The rest of the documentation assumes you have installed env-checker using the PHAR method. 
+
 
 ## Updates
 
 If you are using the PHAR release, you can easily update your version by running the self-update command:
 ```bash
-
+./env-checker.phar self-update
 ```
 
 ## Usage
-
-This assumes you have installed env-checker using the PHAR method, mentioned [above](#PHAR). 
 
 #### Locally (e.g. a pre-commit hook)
 
