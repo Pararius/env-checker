@@ -1,9 +1,4 @@
-cache:
-  directories:
-    - "$HOME/.composer/cache/files"
-
-matrix:
-  fast_finish: true
+sudo: required
 
 services:
   - docker
@@ -14,9 +9,9 @@ env:
     - PATH=${TRAVIS_BUILD_DIR}/:${PATH}
 
 before_install:
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod u+x docker-compose
-  - docker-compose --version
+  - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 
 install:
   - make install
