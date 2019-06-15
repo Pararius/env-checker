@@ -22,7 +22,7 @@ Go to our [releases](https://github.com/Pararius/env-checker/releases) page for 
 wget https://github.com/pararius/env-checker/releases/download/VERSION/env-checker.phar
 ```
 
-**NOTE:** Replace `VERSION` with the version you like to install.
+**NOTE:** Replace `VERSION` with the version you would like to install.
 
 
 #### Composer

@@ -36,7 +36,7 @@ cs: ## Verifies contexts are not crossing boundaries
 	php vendor/bin/php-cs-fixer fix --no-interaction --dry-run
 
 compile: ## Compiles the package into a PHAR file for release purposes
-	test -f ./box.phar || wget https://github.com/humbug/box/releases/download/3.8.0/box.phar && chmod +x ./box.phar
+	test -f ./box.phar || wget -q https://github.com/humbug/box/releases/download/3.8.0/box.phar && chmod u+x ./box.phar
 	php ./box.phar compile -q
 
 run: ## Runs the main executable (use `make run ARGS=...` to append arguments)

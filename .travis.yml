@@ -30,4 +30,3 @@ deploy:
   on:
     tags: true
     repo: Pararius/env-checker
-    condition: "$EXECUTE_DEPLOYMENT"
