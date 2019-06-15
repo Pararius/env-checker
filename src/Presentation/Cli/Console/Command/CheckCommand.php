@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pararius\EnvChecker\Presentation\Cli\Command;
+namespace Pararius\EnvChecker\Presentation\Cli\Console\Command;
 
 use Pararius\EnvChecker\Application\Loader\EnvVarLoader;
 use Symfony\Component\Console\Command\Command;
@@ -53,8 +53,16 @@ final class CheckCommand extends Command
             InputArgument::REQUIRED,
             'The path to the directory containing your project\'s deployment (i.e. k8s yamls).'
         );
+
+        $this->setDescription(
+            'Checks whether all variables defined in your (project) specification, '.
+            'are implemented by your (deployment) implementation files'
+        );
     }
 
+    /**
+     * @inheritdoc
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $specCollection = $this->specificationLoader->load($input->getArgument('path-to-specification'));
@@ -85,5 +93,7 @@ final class CheckCommand extends Command
         }
 
         $output->writeln('<info>Great! All the expected variables have been defined on the implementation side!</info>');
+
+        return 0;
     }
 }

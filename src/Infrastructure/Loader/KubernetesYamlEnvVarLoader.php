@@ -12,11 +12,24 @@ use Symfony\Component\Yaml\Yaml;
 final class KubernetesYamlEnvVarLoader implements EnvVarLoader
 {
     /**
+     * @var Finder
+     */
+    private $finder;
+
+    /**
+     * @param Finder $finder
+     */
+    public function __construct(Finder $finder)
+    {
+        $this->finder = $finder;
+    }
+
+    /**
      * @inheritdoc
      */
     public function load(string $path): VarCollection
     {
-        $finder = (new Finder())->in($path)->name(['*.yml', '*.yaml']);
+        $finder = $this->finder->in($path)->name(['*.yml', '*.yaml']);
         $result = new VarCollection();
 
         foreach ($finder->getIterator() as $file) {

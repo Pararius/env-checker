@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pararius\EnvChecker\Presentation\Cli\Command;
+namespace Pararius\EnvChecker\Presentation\Cli\Console\Command;
 
 use Humbug\SelfUpdate\Updater;
 use PHAR;
@@ -72,6 +72,10 @@ final class SelfUpdateCommand extends Command
      */
     private function getLocalPharName(): string
     {
-        return basename(PHAR::running());
+        if ($phar = PHAR::running()) {
+            return basename($phar);
+        }
+
+        return 'NON-PHAR-FILE';
     }
 }

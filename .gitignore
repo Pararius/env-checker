@@ -3,4 +3,5 @@
 *.phar
 composer.lock
 tests/.phpunit.result.cache
-vendor
+var/
+vendor/
