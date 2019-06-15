@@ -2,9 +2,9 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../config/MyKernel.php';
+require_once __DIR__ . '/../config/Kernel.php';
 
-$kernel = new MyKernel('dev', true);
+$kernel = new Kernel('dev', true);
 $kernel->boot();
 
 $container = $kernel->getContainer();

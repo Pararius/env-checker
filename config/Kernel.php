@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
-final class MyKernel extends BaseKernel
+final class Kernel extends BaseKernel
 {
     /**
      * @inheritdoc

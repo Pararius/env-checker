@@ -20,7 +20,7 @@ script:
   - make test
   - make deptrac
   - make cs
-  - make compile run
+  - make demo
 
 deploy:
   provider: releases
