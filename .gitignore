@@ -1,7 +1,9 @@
 .deptrac.cache
 .php_cs.cache
-*.phar
+bin/*.phar
+box.phar
 composer.lock
 tests/.phpunit.result.cache
-var/
+var/cache/
+var/log/
 vendor/
