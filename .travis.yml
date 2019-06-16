@@ -20,7 +20,7 @@ script:
   - make test
   - make deptrac
   - make cs
-  - make compile
+  - make compile APP_VERSION=${TRAVIS_TAG:-DEMO}
 
 deploy:
   provider: releases
