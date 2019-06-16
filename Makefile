@@ -50,4 +50,4 @@ gif: ## Generates a new demo .GIF to use in the README.md
 	@command -v terminalizer >/dev/null 2>&1 || { echo >&2 "I require `terminalizer` but it's not installed. Aborting."; exit 1; }
 	@cd examples && terminalizer render demo -o demo.gif
 
-.PHONY: install up down test deptrac cs compile demo gif
+.PHONY: install up down test deptrac cs compile demo demo-dev gif
