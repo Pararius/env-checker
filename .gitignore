@@ -1,6 +1,7 @@
 .deptrac.cache
 .php_cs.cache
 bin/*.phar
+box.json
 box.phar
 composer.lock
 tests/.phpunit.result.cache

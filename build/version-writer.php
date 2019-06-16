@@ -3,7 +3,7 @@
 
 declare(strict_types=1);
 
-$pathToJson = __DIR__ . '/../box.json.dist';
+$pathToJson = __DIR__ . '/../box.json';
 $config = json_decode(file_get_contents($pathToJson), true);
 
 if (!isset($config['replacements'])) {
@@ -18,7 +18,7 @@ if (!$newVersion) {
 
 $config['replacements']['version'] = $newVersion;
 
-$newContent = json_encode($config);
+$newContent = json_encode($config, JSON_PRETTY_PRINT);
 
 file_put_contents($pathToJson, $newContent);
 
