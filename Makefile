@@ -41,6 +41,13 @@ compile: ## Compiles the package into a PHAR file for release purposes
 
 demo: ## Runs a check on the example directory
 	@test -f ./bin/env-checker.phar || make compile APP_VERSION=DEMO
-	docker-compose run --rm php ./bin/env-checker.phar check --informative ./example/specification/.env.dist ./example/implementation
+	docker-compose run --rm php ./bin/env-checker.phar check --informative ./examples/specification/.env.dist ./examples/implementation
 
-.PHONY: install up down test deptrac cs compile demo
+demo-dev: ## Runs a check on the example directory
+	docker-compose run --rm php ./bin/env-checker check ./examples/specification/.env.dist ./examples/implementation
+
+gif: ## Generates a new demo .GIF to use in the README.md
+	@command -v terminalizer >/dev/null 2>&1 || { echo >&2 "I require `terminalizer` but it's not installed. Aborting."; exit 1; }
+	@cd examples && terminalizer render demo -o demo.gif
+
+.PHONY: install up down test deptrac cs compile demo demo-dev gif

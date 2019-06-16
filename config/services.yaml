@@ -21,13 +21,18 @@ services:
   app.dotenv:
     class: Symfony\Component\Dotenv\Dotenv
 
+  app.dotenv_driver:
+    class: Pararius\EnvChecker\Infrastructure\Specification\Dotenv\RealDotenvDriver
+    arguments:
+      - '@app.dotenv'
+
   app.finder:
     class: Symfony\Component\Finder\Finder
 
   app.specification_loader.dotenv:
     class: Pararius\EnvChecker\Infrastructure\Specification\Dotenv\Loader
     arguments:
-      - '@app.dotenv'
+      - '@app.dotenv_driver'
 
   app.implementation_loader.kubernetes:
     class: Pararius\EnvChecker\Infrastructure\Implementation\Kubernetes\Loader
