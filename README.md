@@ -1,6 +1,7 @@
 # env-checker
 
 [![Build Status](https://travis-ci.com/Pararius/env-checker.svg?branch=master)](https://travis-ci.com/Pararius/env-checker)
+[![Packagist](https://img.shields.io/packagist/v/Pararius/env-checker.svg)](https://travis-ci.com/Pararius/env-checker)
 [![SemVer stability](https://api.dependabot.com/badges/compatibility_score?dependency-name=pararius/env-checker&package-manager=composer&version-scheme=semver)](https://dependabot.com/compatibility-score/?dependency-name=pararius/env-checker&package-manager=composer)
 
 Small tool that checks if your k8s deployment contains all 
