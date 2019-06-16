@@ -8,6 +8,8 @@ Small tool that checks if your k8s deployment contains all
 environment variables that your project requires.
 
 
+[![SemVer stability](/examples/demo.gif)](demo)
+
 ## Requirements
 
 - Machine with PHP installed (>= 7.2)

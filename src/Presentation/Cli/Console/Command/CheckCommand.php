@@ -86,8 +86,9 @@ final class CheckCommand extends Command
         if ($diff->count() > 0) {
             $output->writeln('<error>Uh oh! Not all variables have been defined on the implementation side</error>');
             $output->writeln(sprintf(
-                '<comment>%d environment variables have not been implemented in "%s"</comment>',
+                '<comment>%d environment variable(s) %s not been implemented in "%s"</comment>',
                 $diff->count(),
+                $diff->count() > 1 ? 'have' : 'has',
                 $input->getArgument('path-to-implementation')
             ));
 
