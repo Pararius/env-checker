@@ -1,14 +1,1 @@
-{
-    "chmod": "0755",
-    "main": "bin/env-checker",
-    "output": "bin/env-checker.phar",
-    "directories": ["config", "src"],
-    "finder": [
-        {
-            "name": "*.php",
-            "exclude": ["test", "tests"],
-            "in": "vendor"
-         }
-    ],
-    "stub": true
-}
+{"replacements":{"version":"0.0.4"},"chmod":"0755","main":"bin\/env-checker","output":"bin\/env-checker.phar","directories":["config","src"],"finder":[{"name":"*.php","exclude":["test","tests"],"in":"vendor"}],"stub":true}

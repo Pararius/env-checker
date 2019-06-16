@@ -1,12 +1,23 @@
 #!/usr/bin/env php
 <?php
 
+use Pararius\EnvChecker\Presentation\Cli\Console\Command\SelfUpdateCommand;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../config/Kernel.php';
+
+// placeholders like this get replaced during compilation
+putenv('APP_VERSION=@version@');
 
 $kernel = new Kernel('dev', true);
 $kernel->boot();
 
 $container = $kernel->getContainer();
-$application = $container->get('application');
+$application = $container->get('app.presentation.cli.console.application');
+
+if (PHAR::running()) {
+    $updater = $container->get('humbug.self_update.updater');
+    $application->add(new SelfUpdateCommand($updater));
+}
+
 $application->run();

@@ -2,52 +2,49 @@ services:
   _defaults:
     autowire: false
 
-  application:
-    public: true
-    class: Symfony\Component\Console\Application
-    arguments:
-      - 'env-checker'
-    calls:
-      - ['add', ['@check_command']]
-      - ['add', ['@self_update_command']]
-
-  dotenv:
-    class: Symfony\Component\Dotenv\Dotenv
-
-  finder:
-    class: Symfony\Component\Finder\Finder
-
-  updater_strategy:
+  humbug.self_update.github_strategy:
     class: Humbug\SelfUpdate\Strategy\GithubStrategy
     calls:
       - ['setPackageName', ['pararius/env-checker']]
       - ['setPharName', ['env-checker.phar']]
+      - ['setCurrentLocalVersion', ['%env(APP_VERSION)%']]
 
-  updater:
+  humbug.self_update.updater:
+    public: true
     class: Humbug\SelfUpdate\Updater
     arguments:
       - 'bin/env-checker.phar'
       - false
     calls:
-      - ['setStrategyObject', ['@updater_strategy']]
+      - ['setStrategyObject', ['@humbug.self_update.github_strategy']]
 
-  loader.dotenv:
+  app.dotenv:
+    class: Symfony\Component\Dotenv\Dotenv
+
+  app.finder:
+    class: Symfony\Component\Finder\Finder
+
+  app.specification_loader.dotenv:
     class: Pararius\EnvChecker\Infrastructure\Specification\Dotenv\Loader
     arguments:
-      - '@dotenv'
+      - '@app.dotenv'
 
-  loader.kubernetes_yaml:
+  app.implementation_loader.kubernetes:
     class: Pararius\EnvChecker\Infrastructure\Implementation\Kubernetes\Loader
     arguments:
-      - '@finder'
+      - '@app.finder'
 
-  check_command:
+  app.presentation.cli.console_command.check:
     class: Pararius\EnvChecker\Presentation\Cli\Console\Command\CheckCommand
     arguments:
-      - '@loader.dotenv'
-      - '@loader.kubernetes_yaml'
+      - '@app.specification_loader.dotenv'
+      - '@app.implementation_loader.kubernetes'
 
-  self_update_command:
-    class: Pararius\EnvChecker\Presentation\Cli\Console\Command\SelfUpdateCommand
+  app.presentation.cli.console.application:
+    public: true
+    class: Symfony\Component\Console\Application
     arguments:
-      - '@updater'
+      - 'env-checker'
+      - '%env(APP_VERSION)%'
+    calls:
+      - ['add', ['@app.presentation.cli.console_command.check']]

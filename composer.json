@@ -14,6 +14,12 @@
         "symfony/http-kernel": "^4.3",
         "symfony/yaml": "^4.3"
     },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.15",
+        "phpunit/phpunit": "^8.2",
+        "sensiolabs-de/deptrac-shim": "^0.5.0",
+        "symfony/var-dumper": "^4.3"
+    },
     "config": {
         "preferred-install": {
             "*": "dist"
@@ -29,12 +35,6 @@
         "psr-4": {
             "Pararius\\EnvChecker\\Tests\\": "tests/"
         }
-    },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.15",
-        "phpunit/phpunit": "^8.2",
-        "sensiolabs-de/deptrac-shim": "^0.5.0",
-        "symfony/var-dumper": "^4.3"
     },
     "bin": ["bin/env-checker"]
 }
