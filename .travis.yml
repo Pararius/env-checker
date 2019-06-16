@@ -29,8 +29,7 @@ deploy:
     - bin/env-checker.phar
     #- bin/env-checker.phar.pubkey
   skip_cleanup: true
-  script:
-    - make compile APP_VERSION=${TRAVIS_TAG}
   on:
     tags: true
     repo: Pararius/env-checker
+    condition: make compile APP_VERSION=${TRAVIS_TAG}
