@@ -1,22 +1,7 @@
 services:
   _defaults:
     autowire: false
-
-  humbug.self_update.github_strategy:
-    class: Humbug\SelfUpdate\Strategy\GithubStrategy
-    calls:
-      - ['setPackageName', ['pararius/env-checker']]
-      - ['setPharName', ['env-checker.phar']]
-      - ['setCurrentLocalVersion', ['%env(APP_VERSION)%']]
-
-  humbug.self_update.updater:
-    public: true
-    class: Humbug\SelfUpdate\Updater
-    arguments:
-      - 'bin/env-checker.phar'
-      - false
-    calls:
-      - ['setStrategyObject', ['@humbug.self_update.github_strategy']]
+    public: false
 
   app.dotenv:
     class: Symfony\Component\Dotenv\Dotenv
@@ -40,16 +25,29 @@ services:
       - '@app.finder'
 
   app.presentation.cli.console_command.check:
+    public: true
     class: Pararius\EnvChecker\Presentation\Cli\Console\Command\CheckCommand
     arguments:
       - '@app.specification_loader.dotenv'
       - '@app.implementation_loader.kubernetes'
 
-  app.presentation.cli.console.application:
+  app.presentation.cli.console_command.self_update:
     public: true
-    class: Symfony\Component\Console\Application
+    class: Pararius\EnvChecker\Presentation\Cli\Console\Command\SelfUpdateCommand
     arguments:
-      - 'env-checker'
-      - '%env(APP_VERSION)%'
+      - '@humbug.self_update.updater'
+
+  humbug.self_update.github_strategy:
+    class: Humbug\SelfUpdate\Strategy\GithubStrategy
     calls:
-      - ['add', ['@app.presentation.cli.console_command.check']]
+      - ['setPackageName', ['pararius/env-checker']]
+      - ['setPharName', ['env-checker.phar']]
+      - ['setCurrentLocalVersion', ['%env(APP_VERSION)%']]
+
+  humbug.self_update.updater:
+    class: Humbug\SelfUpdate\Updater
+    arguments:
+      - 'bin/env-checker.phar'
+      - false
+    calls:
+      - ['setStrategyObject', ['@humbug.self_update.github_strategy']]
