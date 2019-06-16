@@ -1,7 +1,8 @@
 ## 0.0.5
 
-- Added scripts for generating demo .GIFs
-- Improved documentation
+- Added GIF to README and a script for generating them in the future
+- Added loader tests using a virtual file system
+- Created proxy class for the Dotenv implementation so it can be mocked during tests 
 
 ## 0.0.4
 
