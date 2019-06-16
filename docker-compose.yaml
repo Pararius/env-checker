@@ -5,3 +5,4 @@ services:
     build: docker/php
     volumes:
       - ./:/app:cached
+    working_dir: /app

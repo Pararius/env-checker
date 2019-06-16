@@ -10,6 +10,7 @@
         "symfony/console": "^4.3",
         "symfony/dependency-injection": "^4.3",
         "symfony/dotenv": "^4.3",
+        "symfony/filesystem": "^4.3",
         "symfony/finder": "^4.3",
         "symfony/http-kernel": "^4.3",
         "symfony/yaml": "^4.3"
@@ -17,6 +18,7 @@
     "require-dev": {
         "ext-json": "^1.7",
         "friendsofphp/php-cs-fixer": "^2.15",
+        "mikey179/vfsstream": "^1.6",
         "phpunit/phpunit": "^8.2",
         "sensiolabs-de/deptrac-shim": "^0.5.0",
         "symfony/var-dumper": "^4.3"

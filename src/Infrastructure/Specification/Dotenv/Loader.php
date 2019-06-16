@@ -6,19 +6,18 @@ namespace Pararius\EnvChecker\Infrastructure\Specification\Dotenv;
 
 use Pararius\EnvChecker\Application\EnvVarLoader;
 use Pararius\EnvChecker\Application\VarCollection;
-use Symfony\Component\Dotenv\Dotenv;
 
 final class Loader implements EnvVarLoader
 {
     /**
-     * @var Dotenv
+     * @var DotenvDriver
      */
     private $dotenv;
 
     /**
-     * @param Dotenv $dotenv
+     * @param DotenvDriver $dotenv
      */
-    public function __construct(Dotenv $dotenv)
+    public function __construct(DotenvDriver $dotenv)
     {
         $this->dotenv = $dotenv;
     }
