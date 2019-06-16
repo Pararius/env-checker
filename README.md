@@ -1,5 +1,7 @@
 # env-checker
 
+[![Build Status](https://travis-ci.com/Pararius/env-checker.svg?branch=master)](https://travis-ci.com/Pararius/env-checker)
+
 Small tool that checks if your k8s deployment contains all 
 environment variables that your project requires.
 
