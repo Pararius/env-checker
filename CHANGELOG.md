@@ -1,3 +1,7 @@
+## 0.0.4
+
+- PHAR: Fixed issue with determining currently installed version
+
 ## 0.0.3
 
 - Implemented dependency injection to improve SRP and testability.
