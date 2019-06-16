@@ -1,8 +1,10 @@
 # env-checker
 
-[![Build Status](https://travis-ci.com/pararius/env-checker.svg?branch=master)](https://travis-ci.com/pararius/env-checker)
-[![Packagist](https://img.shields.io/packagist/v/pararius/env-checker.svg)](https://packagist.org/packages/pararius/env-checker)
-[![SemVer stability](https://api.dependabot.com/badges/compatibility_score?dependency-name=pararius/env-checker&package-manager=composer&version-scheme=semver)](https://dependabot.com/compatibility-score/?dependency-name=pararius/env-checker&package-manager=composer)
+[![Latest Stable Version](https://poser.pugx.org/pararius/env-checker/v/stable)](https://packagist.org/packages/pararius/env-checker)
+[![Total Downloads](https://poser.pugx.org/pararius/env-checker/downloads)](https://packagist.org/packages/pararius/env-checker)
+[![Latest Unstable Version](https://poser.pugx.org/pararius/env-checker/v/unstable)](https://packagist.org/packages/pararius/env-checker)
+[![License](https://poser.pugx.org/pararius/env-checker/license)](https://packagist.org/packages/pararius/env-checker)
+[![composer.lock](https://poser.pugx.org/pararius/env-checker/composerlock)](https://packagist.org/packages/pararius/env-checker)
 
 CLI tool to check if your k8s deployment implements all 
 environment variables that your project specifies.
