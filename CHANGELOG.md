@@ -1,3 +1,8 @@
+## 0.0.5
+
+- Added scripts for generating demo .GIFs
+- Improved documentation
+
 ## 0.0.4
 
 - PHAR: Fixed issue with determining currently installed version
