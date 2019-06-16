@@ -52,7 +52,7 @@ final class LoaderTest extends TestCase
     /**
      * @test
      */
-    public function it_can_load_variables_from_kubernetes_configurations()
+    public function it_can_load_all_variables_from_kubernetes_configurations()
     {
         $basePath = $this->root->url();
         $finder = new ProphesizedFinder();
@@ -64,6 +64,7 @@ final class LoaderTest extends TestCase
             'DEFINED_IN_BOTH_2',
             'DEFINED_IN_BOTH_3',
             'DEFINED_IN_BOTH_4',
+            'DEFINED_IN_BOTH_5',
             'DEFINED_IN_IMPLEMENTATION',
         ];
 

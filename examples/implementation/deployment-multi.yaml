@@ -8,18 +8,13 @@ spec:
   template:
     metadata: {}
     spec:
-      imagePullSecrets:
-        - name: gcrsecret
       initContainers:
         - name: my-init-service
           image: my-init-service-image
           command: ["bin/my-tool", "command"]
           env:
-            - name: DEFINED_IN_BOTH_2
+            - name: DEFINED_IN_BOTH_3
               value: "..."
-          envFrom:
-            - secretRef:
-                name: my-secret
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -30,8 +25,6 @@ spec:
   template:
     metadata: {}
     spec:
-      imagePullSecrets:
-        - name: gcrsecret
       containers:
         - name: my-service
           image: my-service-image
@@ -43,4 +36,7 @@ spec:
                 secretKeyRef:
                   name: my-virtual-secret
                   key: defined-in-both-4
+          envFrom:
+            - secretRef:
+                name: my-secret-used-as-envfrom
 

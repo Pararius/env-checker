@@ -84,34 +84,13 @@ final class Loader implements EnvVarLoader
      */
     private function extractSimpleVars(array $document, VarCollection $collection): void
     {
-        if ($found = $this->findByKeyRecursively('env', $document)) {
-            foreach (array_column($found, 'name') as $name) {
-                $collection->add($name);
-            }
-        }
-    }
-
-    /**
-     * @param string $string
-     * @param array $data
-     *
-     * @return mixed
-     */
-    private function findByKeyRecursively(string $string, array $data)
-    {
-        foreach ($data as $k => $v) {
-            if ($k === $string) {
-                return $v;
-            }
-
-            if (is_array($v)) {
-                if ($match = $this->findByKeyRecursively($string, $v)) {
-                    return $match;
+        if ($found = $this->findArrayByKeyRecursively('env', $document)) {
+            foreach ($found as $varSet) {
+                foreach (array_column($varSet, 'name') as $name) {
+                    $collection->add($name);
                 }
             }
         }
-
-        return null;
     }
 
     /**
@@ -119,10 +98,34 @@ final class Loader implements EnvVarLoader
      */
     private function extractReferences(array $document): void
     {
-        if ($found = $this->findByKeyRecursively('envFrom', $document)) {
-            foreach ($found as $reference) {
-                $this->references[] = $reference['secretRef']['name'];
+        if ($found = $this->findArrayByKeyRecursively('envFrom', $document)) {
+            foreach ($found as $referenceSet) {
+                foreach ($referenceSet as $reference) {
+                    $this->references[] = $reference['secretRef']['name'];
+                }
             }
         }
+    }
+
+    /**
+     * @param string $string
+     * @param array $data
+     * @param array $matches
+     *
+     * @return mixed[]
+     */
+    private function findArrayByKeyRecursively(string $string, array $data, array &$matches = [])
+    {
+        foreach ($data as $k => $v) {
+            if (is_array($v)) {
+                if ($k === $string) {
+                    $matches[] = $v;
+                } else {
+                    $this->findArrayByKeyRecursively($string, $v, $matches);
+                }
+            }
+        }
+
+        return $matches;
     }
 }
