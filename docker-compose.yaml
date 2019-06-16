@@ -5,4 +5,5 @@ services:
     build: docker/php
     volumes:
       - ./:/app:cached
+      - $HOME/.composer/cache/:/root/.composer/cache:cached
     working_dir: /app
