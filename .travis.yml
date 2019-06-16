@@ -20,6 +20,7 @@ script:
   - make test
   - make deptrac
   - make cs
+  - make compile
 
 deploy:
   provider: releases
@@ -32,4 +33,3 @@ deploy:
   on:
     tags: true
     repo: Pararius/env-checker
-    condition: make compile APP_VERSION=${TRAVIS_TAG}
