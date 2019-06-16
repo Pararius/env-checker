@@ -1,3 +1,9 @@
+## 0.1.0
+
+- Fixed major bug in the loading of kubernetes configuration files
+- Added caching for Composer dependencies
+- Tweaked Travis configuration to run builds as fast as possible
+
 ## 0.0.4
 
 - PHAR: Fixed issue with determining currently installed version
