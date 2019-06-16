@@ -2,19 +2,23 @@
 <?php
 
 use Pararius\EnvChecker\Presentation\Cli\Console\Command\SelfUpdateCommand;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../config/Kernel.php';
 
 // placeholders like this get replaced during compilation
 putenv('APP_VERSION=@version@');
 
-$kernel = new Kernel('dev', true);
-$kernel->boot();
-
-$container = $kernel->getContainer();
+// bootstrapping (DI etc)
+$container = new ContainerBuilder();
+$loader = new YamlFileLoader($container, new FileLocator());
+$loader->load(__DIR__.'/../config/services.yaml');
+$container->compile(true);
 $application = $container->get('app.presentation.cli.console.application');
 
+// only enable self update command when running as PHAR executable
 if (PHAR::running()) {
     $updater = $container->get('humbug.self_update.updater');
     $application->add(new SelfUpdateCommand($updater));

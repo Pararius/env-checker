@@ -1,3 +1,8 @@
+## 0.1.1
+
+- Removed need for a Kernel class by doing manual bootstrapping
+- Consequently reduced PHAR size by half (6 -> 3mb)
+
 ## 0.1.0
 
 - Fixed major bug in the loading of kubernetes configuration files
