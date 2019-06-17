@@ -47,7 +47,7 @@ services:
   humbug.self_update.updater:
     class: Humbug\SelfUpdate\Updater
     arguments:
-      - 'bin/env-checker.phar'
+      - './env-checker.phar'
       - false
     calls:
       - ['setStrategyObject', ['@humbug.self_update.github_strategy']]
