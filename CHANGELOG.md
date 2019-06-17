@@ -1,3 +1,7 @@
+## 0.2.0
+
+- Fixed bug in PHAR update mechanism
+
 ## 0.1.1
 
 - Removed need for a Kernel class by doing manual bootstrapping
